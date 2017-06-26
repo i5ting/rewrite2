@@ -10,10 +10,10 @@
 ![1](1.png)
 
 1. rewrite解决跨域问题
-1. 直接rewrite成jsonp接口
+1. 直接rewrite成jsonp接口(同机房更好)
 1. 支持http和https转换
 1. 配置化，无须部署
-1. 收益=接口个数*0.5pd
+1. 收益=(接口个数x*0.5pd) + (node项目部署次数y*node项目部署时间)
 
 ## Install
 
