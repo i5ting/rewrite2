@@ -11,10 +11,9 @@
     "url": "git@gitlab.corp.qunar.com:shilong.sang/jsonpserver.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "i5ting",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.5.0",
     "bluebird": "^3.5.0",
     "change-case": "^3.0.1",
     "colorful": "^2.1.0",
