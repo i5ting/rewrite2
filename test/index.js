@@ -9,19 +9,7 @@ const SERVER_PORT = 3001
 
 test.before(t => {
   // This runs before all tests
-  http
-    .createServer((req, res) => {
-      var path = url.parse(req.url).pathname;
-      if (config[path]) {
-        rewrite2.proxy(req, res, config[path]);
-      } else {
-        res.end(
-          JSON.stringify({
-            msg: "not match!!"
-          })
-        );
-      }
-    })
+  rewrite2.server(config)
     .listen(SERVER_PORT , "127.0.0.1");
 
   http
