@@ -68,6 +68,20 @@ rewrite2(req, {
 
 https证书生成https://github.com/ottomao/node-easy-cert
 
+## config
+
+- url
+- host = hostname + port
+- hostname
+- port
+- path
+- method
+- protocol
+- jsonp:true
+- jsonp_function: 'callback'
+- filter(options) {}
+
+
 ## Contributing
 
 1. Fork it
