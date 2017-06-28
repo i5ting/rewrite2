@@ -8,7 +8,6 @@ var http = require("http"),
   url = require("url"),
   pathUtil = require("path"), // no use
   zlib = require("zlib"),
-  async = require("async"),
   color = require("colorful"),
   Buffer = require("buffer").Buffer,
   util = require("./util"),

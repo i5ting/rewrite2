@@ -92,8 +92,8 @@ rewrite2.server(config).listen(3000, "127.0.0.1");
 
 ## API
 
-- rewrite2.proxy(req, res, host)
-- rewrite2.jsonp_proxy(req, res, host)
+- rewrite2.proxy(req, res, host|config)
+- rewrite2.jsonp_proxy(req, res, host|config)
 - rewrite2.server(config)
 
 ## Contributing
