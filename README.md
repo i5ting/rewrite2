@@ -26,20 +26,20 @@ $ npm i -S rewrite2
 ### 1)最简单的方式
 
 ```
-rewrite2.proxy(req, res, host)
+rewrite2.proxy(req, res, url)
 ```
 
 支持jsonp
 
 ```
-rewrite2.jsonp_proxy(req, res, host)
+rewrite2.jsonp_proxy(req, res, url)
 ```
 
 or
 
 ```
 rewrite2.jsonp_proxy(req, res, {
-	host: host,
+	url: url,
 	jsonp: true
 })
 ```
@@ -92,8 +92,8 @@ rewrite2.server(config).listen(3000, "127.0.0.1");
 
 ## API
 
-- rewrite2.proxy(req, res, host|config)
-- rewrite2.jsonp_proxy(req, res, host|config)
+- rewrite2.proxy(req, res, url|config)
+- rewrite2.jsonp_proxy(req, res, url|config)
 - rewrite2.server(config)
 
 ## Contributing
