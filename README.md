@@ -44,25 +44,22 @@ rewrite2.jsonp_proxy(req, res, {
 })
 ```
 
-
 ###  2)使用k/v配置方式
 
 ```
 rewrite2.proxy(req, {
   protocol: 'http',
   url: 'http://anyproxy.io/',
-  requestOptions: {
-    hostname: 'anyproxy.io',
-    port: 80,
-    path: '/',
-    method: 'GET',
-    headers: {
-      Host: 'anyproxy.io',
-      'Proxy-Connection': 'keep-alive',
-      'User-Agent': '...'
-    }
+  hostname: 'anyproxy.io',
+  port: 80,
+  path: '/',
+  method: 'GET',
+  headers: {
+    Host: 'anyproxy.io',
+    'Proxy-Connection': 'keep-alive',
+    'User-Agent': '...'
   },
-  requestData: '...',
+  body: '...',
 })
 ```
 
