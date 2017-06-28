@@ -70,15 +70,15 @@ https证书生成https://github.com/ottomao/node-easy-cert
 
 ## config
 
-- url
+- [x] url
 - host = hostname + port
 - hostname
 - port
 - path
 - method
 - protocol
-- jsonp:true
-- jsonp_function: 'callback'
+- [x] jsonp:true
+- [x] jsonp_function: 'callback'
 - filter(options) {}
 
 
