@@ -86,6 +86,7 @@ rewrite2.server(config).listen(3000, "127.0.0.1");
 - [x] body(mock response body support string, json, jsonp)
 - filter(options) {}
 - inspect
+- trace && log && monitor
 
 ## API
 
