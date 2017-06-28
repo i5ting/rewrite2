@@ -24,9 +24,21 @@ test.before(t => {
     .listen(3000, "127.0.0.1");
 });
 
-test("url", t => {
+test.only("url", t => {
   return got("http://127.0.0.1:3000/url", { json: true })
     .then(response => {
+      t.is(response.body.now.slang_time, "now");
+    })
+    .catch(error => {
+      console.log(error.response.body);
+      //=> 'Internal server error ...'
+    });
+});
+
+test("url2", t => {
+  return got("http://127.0.0.1:3000/url2", { json: true })
+    .then(response => {
+		console.log(response.body)
       t.is(response.body.now.slang_time, "now");
     })
     .catch(error => {
@@ -59,7 +71,7 @@ test("ip", t => {
     });
 });
 
-test.only("jsonp", t => {
+test("jsonp", t => {
   return got("http://127.0.0.1:3000/jsonp")
     .then(res => {
       //   console.log(res.body);
@@ -71,7 +83,7 @@ test.only("jsonp", t => {
     });
 });
 
-test.only("jsonp with custom callback", t => {
+test("jsonp with custom callback", t => {
   return got("http://127.0.0.1:3000/jsonp?callback=cb")
     .then(res => {
     //   console.log(res.body);

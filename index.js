@@ -22,6 +22,7 @@ https.globalAgent.maxCachedSessions = 0;
 module.exports = function() {};
 
 module.exports.proxy = function(req, userRes, config) {
+   if (typeof config === 'string') config = {url: config}
   /*
     note
         req.url is wired

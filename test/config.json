@@ -1,19 +1,20 @@
 {
-  "/url": {
-    "url": "http://now.httpbin.org"
-  },
-  "/post": {
-    "method": "POST",
-    "url": "http://httpbin.org/post"
-  },
-  "/host": {
-    "host": "httpbin.org"
-  },
-  "/ip": {
-    "host": "httpbin.org"
-  },
-  "/jsonp": {
-    "jsonp": true,
-    "url": "http://httpbin.org/ip"
-  }
+    "/url": "http://now.httpbin.org",
+    "/url2": {
+        "url": "http://now.httpbin.org"
+    },
+    "/post": {
+        "method": "POST",
+        "url": "http://httpbin.org/post"
+    },
+    "/host": {
+        "host": "httpbin.org"
+    },
+    "/ip": {
+        "host": "httpbin.org"
+    },
+    "/jsonp": {
+        "jsonp": true,
+        "url": "http://httpbin.org/ip"
+    }
 }
