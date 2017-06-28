@@ -7,9 +7,6 @@
         "method": "POST",
         "url": "http://httpbin.org/post"
     },
-    "/host": {
-        "host": "httpbin.org"
-    },
     "/ip": {
         "host": "httpbin.org"
     },
