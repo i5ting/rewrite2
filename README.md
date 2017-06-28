@@ -80,6 +80,7 @@ https证书生成https://github.com/ottomao/node-easy-cert
 - [x] jsonp:true
 - [x] jsonp_function: 'callback'
 - filter(options) {}
+- inspect
 
 
 ## Contributing

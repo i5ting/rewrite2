@@ -2,8 +2,8 @@ var http = require("http"),
   https = require("https"),
   extend = require("xtend"),
   net = require("net"),
-  jsonp = require('jsonp-body'),
-   qs = require('qs'),
+  jsonp = require("jsonp-body"),
+  qs = require("qs"),
   fs = require("fs"), // no use
   url = require("url"),
   pathUtil = require("path"), // no use
@@ -22,7 +22,9 @@ https.globalAgent.maxCachedSessions = 0;
 module.exports = function() {};
 
 module.exports.proxy = function(req, userRes, config) {
-   if (typeof config === 'string') config = {url: config}
+  if (typeof config === "string") config = { url: config };
+  let querystring = url.parse(req.url).query
+  req.query = qs.parse(querystring);
   /*
     note
         req.url is wired
@@ -35,33 +37,41 @@ module.exports.proxy = function(req, userRes, config) {
       ? "https"
       : "http",
     //fullUrl = protocol === "http" ? req.url : protocol + "://" + host + req.url,
-    fullUrl = config.url ? config.url : protocol + "://" + host + req.url,
+    fullUrl = config.url ? config.url+ '?' + querystring : protocol + "://" + host + req.url,
     urlPattern = url.parse(fullUrl),
     path = urlPattern.path,
     resourceInfo,
     resourceInfoId = -1,
     reqData;
 
-    req.query = qs.parse(url.parse(req.url).query);
+  if (urlPattern.query) urlPattern.query = querystring
 
-    if (config.host) {
-        urlPattern.host = config.host;
-        var arr = config.host.split(':')
-        urlPattern.hostname = arr[0]
-        urlPattern.port = arr.length===1?80:arr[1];
-    }
+  if (config.host) {
+    urlPattern.host = config.host;
+    var arr = config.host.split(":");
+    urlPattern.hostname = arr[0];
+    urlPattern.port = arr.length === 1 ? 80 : arr[1];
+  }
 
-    if(config.hostname){
-        urlPattern.hostname = config.hostname
-        urlPattern.host = urlPattern.hostname + ':' + urlPattern.port
-    }
+  if (config.hostname) {
+    urlPattern.hostname = config.hostname;
+    urlPattern.host = urlPattern.hostname + ":" + urlPattern.port;
+  }
 
-    if(config.port){
-        urlPattern.port = config.port
-        urlPattern.host = urlPattern.hostname + ':' + urlPattern.port
-    }
+  if (config.port) {
+    urlPattern.port = config.port;
+    urlPattern.host = urlPattern.hostname + ":" + urlPattern.port;
+  }
 
-  if(req.headers.host) req.headers.host = urlPattern.host
+  if (config.path) {
+      urlPattern.path = config.path;
+  }
+
+  if (config.pathname) {
+      urlPattern.pathname = config.pathname;
+  }
+
+  if (req.headers.host) req.headers.host = urlPattern.host;
   // console.log(req.url);
   // console.log(path);
 
@@ -80,7 +90,7 @@ module.exports.proxy = function(req, userRes, config) {
     // resourceInfoId = global.recorder.appendRecord(resourceInfo);
   }
 
-//   logUtil.printLog(color.green("\nreceived request to : " + host + path));
+  //   logUtil.printLog(color.green("\nreceived request to : " + host + path));
 
   //get request body
   function getReqBody() {
@@ -93,7 +103,7 @@ module.exports.proxy = function(req, userRes, config) {
         reqData = Buffer.concat(postData);
         resourceInfo.reqBody = reqData.toString();
 
-        resolve()
+        resolve();
         // global.recorder && global.recorder.updateRecord(resourceInfoId,resourceInfo);
       });
     });
@@ -114,14 +124,14 @@ module.exports.proxy = function(req, userRes, config) {
       method: req.method,
       headers: req.headers,
       jsonp: false,
-      jsonp_function: req.query.callback || 'callback',
+      jsonp_function: req.query.callback || "callback",
       filter: function(options) {}
     };
 
-    var options = extend(defaultOptions, config)
+    var options = extend(defaultOptions, config);
 
     // 赋值后，仍然可以通过此方法修改request options
-    if (config.filter) options = config.filter(options) 
+    if (config.filter) options = config.filter(options);
 
     // options = userRule.replaceRequestOption(req, options) || options;
     options.rejectUnauthorized = false;
@@ -152,7 +162,7 @@ module.exports.proxy = function(req, userRes, config) {
 
       // remove gzip related header, and ungzip the content
       // note there are other compression types like deflate
-      var ifServerGzipped = /gzip/i.    test(resHeader["content-encoding"]);
+      var ifServerGzipped = /gzip/i.test(resHeader["content-encoding"]);
       if (ifServerGzipped) {
         delete resHeader["content-encoding"];
       }
@@ -177,12 +187,15 @@ module.exports.proxy = function(req, userRes, config) {
             serverResData = buff;
           });
         } else {
-        //   callback();
+          //   callback();
         }
         // jsonp wrap
         if (config.jsonp) {
-            serverResData = jsonp(JSON.parse(serverResData.toString()), options.jsonp_function);
-        } 
+          serverResData = jsonp(
+            JSON.parse(serverResData.toString()),
+            options.jsonp_function
+          );
+        }
 
         //send response
         if (global._throttle) {
@@ -194,7 +207,6 @@ module.exports.proxy = function(req, userRes, config) {
           thrStream.emit("data", serverResData);
           thrStream.emit("end");
         } else {
-            
           userRes.end(serverResData);
         }
 
@@ -224,7 +236,7 @@ module.exports.proxy = function(req, userRes, config) {
     proxyReq.end(reqData);
   }
 
-  getReqBody().then(function (params) {
-      dealWithRemoteResonse()
+  getReqBody().then(function(params) {
+    dealWithRemoteResonse();
   });
 };

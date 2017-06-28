@@ -13,6 +13,17 @@
     "/ip": {
         "host": "httpbin.org"
     },
+    "/ip2": {
+        "hostname": "localhost",
+        "port": 3000,
+        "path": "/ip"
+    },
+    "/qs": {
+        "url": "http://httpbin.org/anything/bbb"
+    },
+    "/port": {
+        "port": 3002
+    },
     "/jsonp": {
         "jsonp": true,
         "url": "http://httpbin.org/ip"
