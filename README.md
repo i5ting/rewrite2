@@ -26,19 +26,19 @@ $ npm i -S rewrite2
 1)最简单的方式
 
 ```
-rewrite2(req, host)
+rewrite2.proxy(req, res, host)
 ```
 
 支持jsonp
 
 ```
-rewrite2_jsonp(req, host)
+rewrite2.jsonp_proxy(req, res, host)
 ```
 
 or
 
 ```
-rewrite2_jsonp(req, {
+rewrite2.jsonp_proxy(req, res, {
 	host: host,
 	jsonp: true
 })
@@ -48,7 +48,7 @@ rewrite2_jsonp(req, {
 2)使用k/v配置方式
 
 ```
-rewrite2(req, {
+rewrite2.proxy(req, {
   protocol: 'http',
   url: 'http://anyproxy.io/',
   requestOptions: {
@@ -71,16 +71,17 @@ https证书生成https://github.com/ottomao/node-easy-cert
 ## config
 
 - [x] url
-- host = hostname + port
-- hostname
-- port
-- path
-- method
-- protocol
+- [x] host = hostname + port
+- [x] hostname
+- [x] port
+- [x] path
+- [x] method
+- [x] protocol
 - [x] jsonp:true
 - [x] jsonp_function: 'callback'
 - filter(options) {}
 - inspect
+- [x] body(support string, json, jsonp)
 
 
 ## Contributing
