@@ -83,6 +83,11 @@ https证书生成https://github.com/ottomao/node-easy-cert
 - inspect
 - [x] body(support string, json, jsonp)
 
+## API
+
+- rewrite2.proxy(req, res, host)
+- rewrite2.jsonp_proxy(req, res, host)
+- rewrite2.server(config)
 
 ## Contributing
 
