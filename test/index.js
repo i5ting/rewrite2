@@ -53,7 +53,7 @@ test("url", t => {
 test("url2", t => {
   return got("http://127.0.0.1:3000/url2", { json: true })
     .then(response => {
-      console.log(response.body);
+    //   console.log(response.body);
       t.is(response.body.now.slang_time, "now");
     })
     .catch(error => {
@@ -158,10 +158,10 @@ test("bodystring", t => {
     });
 });
 
-test.only("bodyjson", t => {
+test("bodyjson", t => {
   return got("http://127.0.0.1:3000/bodyjson", { json: true })
     .then(res => {
-       console.dir(res.body);
+    //    console.dir(res.body);
       t.true(res.body.a == 1);
     })
     .catch(error => {
@@ -170,3 +170,14 @@ test.only("bodyjson", t => {
     });
 });
 
+test("bodyjsonp", t => {
+  return got("http://127.0.0.1:3000/bodyjsonp")
+    .then(res => {
+      //   console.log(res.body);
+      t.regex(res.body, /callback/);
+    })
+    .catch(error => {
+      console.log(error);
+      //=> 'Internal server error ...'
+    });
+});

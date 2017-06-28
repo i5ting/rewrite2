@@ -38,7 +38,7 @@ module.exports.proxy = function(req, userRes, config) {
       : "http",
     //fullUrl = protocol === "http" ? req.url : protocol + "://" + host + req.url,
     fullUrl = config.url
-      ? config.url + "?" + querystring
+      ? config.url + (querystring ? "?" + querystring : '')
       : protocol + "://" + host + req.url,
     urlPattern = url.parse(fullUrl),
     path = urlPattern.path,
