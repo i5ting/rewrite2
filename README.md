@@ -23,7 +23,7 @@ $ npm i -S rewrite2
 
 ## Usages
 
-1)最简单的方式
+### 1)最简单的方式
 
 ```
 rewrite2.proxy(req, res, host)
@@ -45,7 +45,7 @@ rewrite2.jsonp_proxy(req, res, {
 ```
 
 
-2)使用k/v配置方式
+###  2)使用k/v配置方式
 
 ```
 rewrite2.proxy(req, {
@@ -66,7 +66,14 @@ rewrite2.proxy(req, {
 })
 ```
 
-https证书生成https://github.com/ottomao/node-easy-cert
+### 3)创建server
+
+```
+const rewrite2 = require(".");
+const config = require("./test/config.json");
+
+rewrite2.server(config).listen(3000, "127.0.0.1");
+```
 
 ## config
 
