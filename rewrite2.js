@@ -18,8 +18,6 @@ var http = require("http"),
 // to fix issue with TLS cache, refer to: https://github.com/nodejs/node/issues/8368
 https.globalAgent.maxCachedSessions = 0
 
-module.exports = function() {}
-
 module.exports = function(req, userRes, config) {
   if (typeof config === "string") config = { url: config }
   let querystring = url.parse(req.url).query
@@ -237,6 +235,7 @@ module.exports = function(req, userRes, config) {
     proxyReq.end(reqData)
   }
 
+  // main
   if (config.body) {
     var serverResData = config.body
     if (typeof config.body === "string") {
