@@ -21,11 +21,28 @@
     "/qs": {
         "url": "http://httpbin.org/anything/bbb"
     },
+    "/qs2": {
+        "path": "/ip"
+    },
     "/port": {
         "port": 3002
     },
     "/jsonp": {
         "jsonp": true,
         "url": "http://httpbin.org/ip"
+    },
+    "/bodystring": {
+        "body": "bodystring"
+    },
+    "/bodyjson": {
+        "body": {
+            "a": 1
+        }
+    },
+     "/bodyjsonp": {
+        "jsonp": true,
+        "body": {
+            "a": 1
+        }
     }
 }

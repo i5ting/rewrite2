@@ -110,7 +110,7 @@ test("port", t => {
     });
 });
 
-test.only("qs", t => {
+test("qs", t => {
   return got("http://127.0.0.1:3000/qs?a=1#hash", { json: true })
     .then(res => {
       //    console.dir(res.body);
@@ -145,3 +145,28 @@ test("jsonp with custom callback", t => {
       //=> 'Internal server error ...'
     });
 });
+
+test("bodystring", t => {
+  return got("http://127.0.0.1:3000/bodystring")
+    .then(res => {
+      //  console.log(res.body);
+      t.true(res.body == "bodystring");
+    })
+    .catch(error => {
+      console.log(error.response.body);
+      //=> 'Internal server error ...'
+    });
+});
+
+test.only("bodyjson", t => {
+  return got("http://127.0.0.1:3000/bodyjson", { json: true })
+    .then(res => {
+       console.dir(res.body);
+      t.true(res.body.a == 1);
+    })
+    .catch(error => {
+      console.log(error.response.body);
+      //=> 'Internal server error ...'
+    });
+});
+

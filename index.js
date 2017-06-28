@@ -23,7 +23,7 @@ module.exports = function() {};
 
 module.exports.proxy = function(req, userRes, config) {
   if (typeof config === "string") config = { url: config };
-  let querystring = url.parse(req.url).query
+  let querystring = url.parse(req.url).query;
   req.query = qs.parse(querystring);
   /*
     note
@@ -37,14 +37,16 @@ module.exports.proxy = function(req, userRes, config) {
       ? "https"
       : "http",
     //fullUrl = protocol === "http" ? req.url : protocol + "://" + host + req.url,
-    fullUrl = config.url ? config.url+ '?' + querystring : protocol + "://" + host + req.url,
+    fullUrl = config.url
+      ? config.url + "?" + querystring
+      : protocol + "://" + host + req.url,
     urlPattern = url.parse(fullUrl),
     path = urlPattern.path,
     resourceInfo,
     resourceInfoId = -1,
     reqData;
 
-  if (urlPattern.query) urlPattern.query = querystring
+  if (urlPattern.query) urlPattern.query = querystring;
 
   if (config.host) {
     urlPattern.host = config.host;
@@ -64,11 +66,11 @@ module.exports.proxy = function(req, userRes, config) {
   }
 
   if (config.path) {
-      urlPattern.path = config.path;
+    urlPattern.path = config.path;
   }
 
   if (config.pathname) {
-      urlPattern.pathname = config.pathname;
+    urlPattern.pathname = config.pathname;
   }
 
   if (req.headers.host) req.headers.host = urlPattern.host;
@@ -236,7 +238,36 @@ module.exports.proxy = function(req, userRes, config) {
     proxyReq.end(reqData);
   }
 
-  getReqBody().then(function(params) {
-    dealWithRemoteResonse();
-  });
+  if (config.body) {
+    var serverResData = config.body;
+    if (typeof config.body === "string") {
+      userRes.writeHead(200, {
+        "Content-Length": Buffer.byteLength(config.body),
+        "Content-Type": "text/plain"
+      });
+
+      userRes.end(config.body);
+    } else {
+      serverResData = JSON.stringify(serverResData);
+
+      // jsonp wrap
+      if (config.jsonp) {
+        serverResData = jsonp(
+          JSON.parse(serverResData),
+          req.query.callback || config.jsonp_function || "callback"
+        );
+      }
+
+      userRes.writeHead(200, {
+        "Content-Length": Buffer.byteLength(serverResData),
+        "Content-Type": "application/json"
+      });
+
+      userRes.end(serverResData.toString());
+    }
+  } else {
+    getReqBody().then(function(params) {
+      dealWithRemoteResonse();
+    });
+  }
 };
