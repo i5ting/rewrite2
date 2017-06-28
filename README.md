@@ -88,7 +88,7 @@ rewrite2.server(config).listen(3000, "127.0.0.1");
 - [x] jsonp_function: 'callback'
 - filter(options) {}
 - inspect
-- [x] body(support string, json, jsonp)
+- [x] body(mock response body support string, json, jsonp)
 
 ## API
 
