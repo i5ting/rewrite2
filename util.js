@@ -154,4 +154,3 @@ module.exports.upper_keys = function (obj) {
 
     return upperObject
 }
-
