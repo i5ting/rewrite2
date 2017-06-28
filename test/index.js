@@ -5,6 +5,7 @@ const got = require("got");
 const http = require("http");
 const rewrite2 = require("..");
 const config = require("./config");
+const SERVER_PORT = 3001
 
 test.before(t => {
   // This runs before all tests
@@ -21,7 +22,7 @@ test.before(t => {
         );
       }
     })
-    .listen(3000, "127.0.0.1");
+    .listen(SERVER_PORT , "127.0.0.1");
 
   http
     .createServer((req, res) => {
@@ -40,7 +41,7 @@ test.before(t => {
 });
 
 test("url", t => {
-  return got("http://127.0.0.1:3000/url", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/url", { json: true })
     .then(response => {
       t.is(response.body.now.slang_time, "now");
     })
@@ -51,7 +52,7 @@ test("url", t => {
 });
 
 test("url2", t => {
-  return got("http://127.0.0.1:3000/url2", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/url2", { json: true })
     .then(response => {
     //   console.log(response.body);
       t.is(response.body.now.slang_time, "now");
@@ -63,7 +64,7 @@ test("url2", t => {
 });
 
 test("post", t => {
-  return got("http://127.0.0.1:3000/post")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/post")
     .then(response => {
       let json = JSON.parse(response.body);
 
@@ -76,7 +77,7 @@ test("post", t => {
 });
 
 test("ip", t => {
-  return got("http://127.0.0.1:3000/ip", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/ip", { json: true })
     .then(res => {
       t.true(res.body.origin.length > 0);
     })
@@ -87,7 +88,7 @@ test("ip", t => {
 });
 
 test("ip2", t => {
-  return got("http://127.0.0.1:3000/ip2", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/ip2", { json: true })
     .then(res => {
       //  console.log(res.body);
       t.true(res.body.origin.length > 0);
@@ -99,7 +100,7 @@ test("ip2", t => {
 });
 
 test("port", t => {
-  return got("http://127.0.0.1:3000/port")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/port")
     .then(res => {
       //  console.log(res.body);
       t.true(res.body == "port");
@@ -111,7 +112,7 @@ test("port", t => {
 });
 
 test("qs", t => {
-  return got("http://127.0.0.1:3000/qs?a=1#hash", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/qs?a=1#hash", { json: true })
     .then(res => {
       //    console.dir(res.body);
       t.true(res.body.args.a == 1);
@@ -123,7 +124,7 @@ test("qs", t => {
 });
 
 test("jsonp", t => {
-  return got("http://127.0.0.1:3000/jsonp")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp")
     .then(res => {
       //   console.log(res.body);
       t.regex(res.body, /callback/);
@@ -135,7 +136,7 @@ test("jsonp", t => {
 });
 
 test("jsonp with custom callback", t => {
-  return got("http://127.0.0.1:3000/jsonp?callback=cb")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp?callback=cb")
     .then(res => {
       //   console.log(res.body);
       t.regex(res.body, /cb/);
@@ -147,7 +148,7 @@ test("jsonp with custom callback", t => {
 });
 
 test("bodystring", t => {
-  return got("http://127.0.0.1:3000/bodystring")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/bodystring")
     .then(res => {
       //  console.log(res.body);
       t.true(res.body == "bodystring");
@@ -159,7 +160,7 @@ test("bodystring", t => {
 });
 
 test("bodyjson", t => {
-  return got("http://127.0.0.1:3000/bodyjson", { json: true })
+  return got("http://127.0.0.1:" + SERVER_PORT + "/bodyjson", { json: true })
     .then(res => {
     //    console.dir(res.body);
       t.true(res.body.a == 1);
@@ -171,7 +172,7 @@ test("bodyjson", t => {
 });
 
 test("bodyjsonp", t => {
-  return got("http://127.0.0.1:3000/bodyjsonp")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/bodyjsonp")
     .then(res => {
       //   console.log(res.body);
       t.regex(res.body, /callback/);
