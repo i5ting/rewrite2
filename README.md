@@ -2,13 +2,14 @@
 
 > 你还在为接口转发和跨域发愁么？
 
-![2](2.png)
+![2](doc/2.png)
 
 
 ## Features
 
-![1](1.png)
+![1](doc/1.png)
 
+1. 使用Node.js 4.x+编写，性能高效
 1. rewrite解决跨域问题
 1. 直接rewrite成jsonp接口(同机房更好)
 1. 支持http和https转换
