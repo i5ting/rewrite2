@@ -112,7 +112,7 @@ test("qs", t => {
 })
 
 test("jsonp", t => {
-  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp1")
     .then(res => {
       //   console.log(res.body)
       t.regex(res.body, /callback/)
@@ -124,7 +124,7 @@ test("jsonp", t => {
 })
 
 test("jsonp with custom callback", t => {
-  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp?callback=cb")
+  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp1?callback=cb")
     .then(res => {
       //   console.log(res.body)
       t.regex(res.body, /cb/)
@@ -163,6 +163,31 @@ test("bodyjsonp", t => {
   return got("http://127.0.0.1:" + SERVER_PORT + "/bodyjsonp")
     .then(res => {
       //   console.log(res.body)
+      t.regex(res.body, /callback/)
+    })
+    .catch(error => {
+      console.log(error)
+      //=> 'Internal server error ...'
+    })
+})
+
+test("/json method=post", t => {
+  return got("http://127.0.0.1:" + SERVER_PORT + "/json?url=http://httpbin.org/post&method=post")
+    .then(response => {
+      let json = JSON.parse(response.body)
+      // console.log(json)
+      t.regex(json.url, /http/)
+    })
+    .catch(error => {
+      console.log(error.response.body)
+      //=> 'Internal server error ...'
+    })
+})
+
+test("/jsonp method=post", t => {
+  return got("http://127.0.0.1:" + SERVER_PORT + "/jsonp?url=http://httpbin.org/post&method=post")
+    .then(res => {
+      // console.log(res.body)
       t.regex(res.body, /callback/)
     })
     .catch(error => {

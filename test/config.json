@@ -24,7 +24,7 @@
     "/port": {
         "port": 3002
     },
-    "/jsonp": {
+    "/jsonp1": {
         "jsonp": true,
         "url": "http://httpbin.org/ip"
     },
