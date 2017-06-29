@@ -1,8 +1,8 @@
-const rewrite2 = require("./rewrite2")
+const Rewrite = require("./rewrite")
 const extend = require("xtend")
 
 exports.proxy = function (req, res, config) {
-    rewrite2(req, res, config)
+    return new Rewrite(req, res, config).start()
 }
 
 exports.jsonp_proxy = function (req, res, config) {
@@ -10,7 +10,7 @@ exports.jsonp_proxy = function (req, res, config) {
         jsonp: true
     }, config)
 
-    rewrite2(req, res, _config)
+    return new Rewrite(req, res, _config).start()
 }
 
 exports.server = require('./server')
