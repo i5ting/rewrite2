@@ -1,4 +1,4 @@
-const Rewrite = require("./rewrite")
+const Rewrite = require("./lib/rewrite")
 const extend = require("xtend")
 
 exports.proxy = function (req, res, config) {
@@ -13,4 +13,4 @@ exports.jsonp_proxy = function (req, res, config) {
     return new Rewrite(req, res, _config).start()
 }
 
-exports.server = require('./server')
+exports.server = require('./lib/server')
