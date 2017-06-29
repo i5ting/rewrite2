@@ -73,6 +73,15 @@ const config = require("./test/config.json");
 rewrite2.server(config).listen(3000, "127.0.0.1");
 ```
 
+### 4)http api
+
+启动server服务，即可访问`/json`和`/jsonp`接口
+
+示例
+
+- http://127.0.0.1:3000/json?url=http://httpbin.org/post&method=post
+- http://127.0.0.1:3000/jsonp?url=http://httpbin.org/post&method=post
+
 ## config
 
 - [x] url
