@@ -22,9 +22,14 @@ module.exports = class Rewrite {
   constructor(req, userRes, config) {
     this.req = req;
     this.userRes = userRes;
-    this.config = config;
 
-    if (typeof config === "string") this.config = { url: config };
+    if (typeof config === "string") {
+      this.config = { url: config };
+    } else {
+      this.config = config;
+    }
+    
+
     let querystring = url.parse(req.url).query;
     this.req.query = qs.parse(querystring);
     this.reqData = undefined;
@@ -41,8 +46,8 @@ module.exports = class Rewrite {
           ? "https"
           : "http",
       //fullUrl = protocol === "http" ? req.url : protocol + "://" + host + req.url,
-      fullUrl = config.url
-        ? config.url + (querystring ? "?" + querystring : "")
+      fullUrl = this.config.url
+        ? this.config.url + (querystring ? "?" + querystring : "")
         : protocol + "://" + host + req.url,
       resourceInfo,
       resourceInfoId = -1;

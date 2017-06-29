@@ -28,16 +28,16 @@ test.before(t => {
     .listen(3002, "127.0.0.1")
 })
 
-// test("url", t => {
-//   return got("http://127.0.0.1:" + SERVER_PORT + "/url", { json: true })
-//     .then(response => {
-//       t.is(response.body.now.slang_time, "now")
-//     })
-//     .catch(error => {
-//       console.log(error.response.body)
-//       //=> 'Internal server error ...'
-//     })
-// })
+test("url", t => {
+  return got("http://127.0.0.1:" + SERVER_PORT + "/url", { json: true })
+    .then(response => {
+      t.is(response.body.now.slang_time, "now")
+    })
+    .catch(error => {
+      console.log(error.response.body)
+      //=> 'Internal server error ...'
+    })
+})
 
 test("url2", t => {
   return got("http://127.0.0.1:" + SERVER_PORT + "/url2", { json: true })
