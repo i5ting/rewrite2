@@ -82,7 +82,7 @@ rewrite2.server(config).listen(3000, "127.0.0.1");
 - http://127.0.0.1:3000/json?url=http://httpbin.org/post&method=post
 - http://127.0.0.1:3000/jsonp?url=http://httpbin.org/post&method=post
 
-## config
+## Configuration
 
 - [x] url
 - [x] host = hostname + port
