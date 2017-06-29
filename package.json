@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git@gitlab.corp.qunar.com:shilong.sang/jsonpserver.git"
   },
+  "engines": {
+    "node": ">= 4.0.0"
+  },
   "keywords": [],
   "author": "i5ting",
   "license": "ISC",
